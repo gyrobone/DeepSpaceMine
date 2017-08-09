@@ -1,5 +1,7 @@
 package com.syrical.dsm;
 
+import java.util.WeakHashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -22,11 +24,12 @@ import org.bukkit.potion.PotionEffectType;
 public class Main extends JavaPlugin {
 	
 	String color = "red";
+	WeakHashMap<Location, String> selections = new WeakHashMap<Location, String>();
 	
 	@Override
 	public void onEnable() {
 		
-		getLogger().info(ChatColor.GREEN + "DeepSpaceMine has been enabled");
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "DeepSpaceMine has been enabled");
 		PluginManager pm = getServer().getPluginManager();
 		DSMListener listener = new DSMListener(this);
 		pm.registerEvents(listener, this);
@@ -42,7 +45,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		
-		getLogger().info(ChatColor.GREEN + "DeepSpaceMine has been disabled");
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "DeepSpaceMine has been disabled");
 		
 	}
 	
@@ -202,10 +205,87 @@ public class Main extends JavaPlugin {
 						
 					} else {
 						
-						p9.sendMessage("I'm not sure what color you chose");
+						p9.sendMessage(ChatColor.RED + "I'm not sure what color you chose");
 						return true;
 						
 					}
+				
+				case "tag":
+					
+					Player p10 = (Player) sender;
+					
+					if (args.length == 0) {
+						
+						p10.sendMessage(ChatColor.RED + "Try adding a color");
+						return true;
+						
+					} else {
+						
+						switch (args[0].toLowerCase()) {
+						
+							case "blue":
+								selections.put(p10.getLocation().add(0, -1, 0), "blue");
+								p10.sendMessage(ChatColor.BLUE + "This block has been tagged as blue");
+								return true;
+							case "red":
+								selections.put(p10.getLocation().add(0, -1, 0), "red");
+								p10.sendMessage(ChatColor.RED + "This block has been tagged as red");
+								return true;
+							case "yellow":
+								selections.put(p10.getLocation().add(0, -1, 0), "yellow");
+								p10.sendMessage(ChatColor.YELLOW + "This block has been tagged as yellow");
+								return true;
+							default:
+								p10.sendMessage(ChatColor.RED + "Color not recognized");
+								return true;
+								
+						}
+						
+					}
+				
+				case "colorify":
+					
+					Player p11 = (Player) sender;
+					
+					for ( Location loc3 : selections.keySet() ) {
+						
+						String color = selections.get(loc3);
+						Block block = loc3.getBlock();
+						
+						switch (color.toLowerCase()) {
+						
+							case "blue":
+								block.setType(Material.WOOL);
+								block.setData((byte) 11);
+								break;
+							case "red":
+								block.setType(Material.WOOL);
+								block.setData((byte) 14);
+								break;
+							case "yellow":
+								block.setType(Material.WOOL);
+								block.setData((byte) 4);
+								break;
+								
+						}
+						
+					}
+					
+					p11.sendMessage("Your blocks have been colorified");
+					return true;
+				
+				case "gui":
+					
+					Player p12 = (Player) sender;
+					boolean success = DSMGUI.openGUI(p12);
+					
+					if (!success) {
+						
+						p12.sendMessage(ChatColor.RED + "Could not open GUI");
+						
+					}
+					
+					return true;
 					
 				default:
 					

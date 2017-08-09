@@ -26,3 +26,12 @@ commands:
     color:
       description: Selects a default color.
       usage: /<command>
+    tag:
+      description: Tags a block with a color.
+      usage: /<command>
+    colorify:
+      description: Colors tagged blocks.
+      usage: /<command>
+    gui:
+      description: Opens GUI.
+      usage: /<command>
