@@ -2,3 +2,6 @@ name: Syrical
 main: com.syrical.dsm.Main
 version: 1.0 Alpha
 commands:
+    givesword:
+      description: Gives a sword.
+      usage: /<command>
