@@ -66,21 +66,22 @@ public class Main extends JavaPlugin {
 					
 					switch (length) {
 					
-						case 1:
-							if ( args[0].equalsIgnoreCase("2") ) {
-								ItemStack sword = new ItemStack(Material.IRON_SWORD, 2);
-								p2.getInventory().addItem(sword);
-								p2.sendMessage(ChatColor.GREEN + "Here are your swords.");
-								return true;
-							} else {
-								p2.sendMessage(ChatColor.RED + "Invalid arguments.");
-								return true;
-							}
 						case 0:
-							ItemStack sword = new ItemStack(Material.IRON_SWORD, 1);
-							p2.getInventory().addItem(sword);
-							p2.sendMessage(ChatColor.GREEN + "Here is your sword.");
+							
+							if (p2.hasPermission("dsm.givesword")) {
+								
+								ItemStack sword = new ItemStack(Material.DIAMOND_SWORD, 1);
+								p2.getInventory().addItem(sword);
+								p2.sendMessage(ChatColor.GREEN + "Here is your sword.");
+								
+							} else {
+								
+								p2.sendMessage(ChatColor.RED + "You do not have permission to use this");
+								
+							}
+							
 							return true;
+							
 						default:
 							p2.sendMessage(ChatColor.RED + "Your command was not recognized");
 							return true;		
@@ -277,11 +278,19 @@ public class Main extends JavaPlugin {
 				case "gui":
 					
 					Player p12 = (Player) sender;
-					boolean success = DSMGUI.openGUI(p12);
 					
-					if (!success) {
+					if (p12.hasPermission("dsm.gui")) {
 						
-						p12.sendMessage(ChatColor.RED + "Could not open GUI");
+						boolean success = DSMGUI.openGUI(p12);
+						if (!success) {
+							
+							p12.sendMessage(ChatColor.RED + "Could not open GUI");
+							
+						}
+						
+					} else {
+						
+						p12.sendMessage(ChatColor.RED + "You do not have permission to use this");
 						
 					}
 					

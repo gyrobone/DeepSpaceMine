@@ -35,3 +35,19 @@ commands:
     gui:
       description: Opens GUI.
       usage: /<command>
+permissions:
+    dsm.*:
+      description: Permission for all commands.
+      children:
+         dsm.build: true
+         dsm.destroy: true
+         dsm.givesword: true
+         dsm.gui: true
+    dsm.build:
+      description: Permission to build blocks.
+    dsm.destroy:
+      description: Permission to destroy blocks.
+    dsm.givesword:
+      description: Permission to give sword to player.
+    dsm.gui:
+      description: Permission to open GUI.

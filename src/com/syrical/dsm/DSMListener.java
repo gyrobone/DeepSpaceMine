@@ -1,9 +1,12 @@
 package com.syrical.dsm;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -50,6 +53,34 @@ public class DSMListener implements Listener {
 		
 	}
 	
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if (!player.hasPermission("dsm.build")) {
+			
+			event.setCancelled(true);
+			player.sendMessage(ChatColor.RED + "You can't build here");
+			
+		}
+		
+	}
+	
+	@EventHandler
+	public void onBlockDestroy(BlockBreakEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if (!player.hasPermission("dsm.destroy")) {
+			
+			event.setCancelled(true);
+			player.sendMessage(ChatColor.RED + "You can't break blocks here");
+			
+		}
+		
+	}
+
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
 		
