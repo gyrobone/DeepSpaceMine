@@ -11,3 +11,18 @@ commands:
     spawn:
       description: Teleports you to spawn.
       usage: /<command>
+    glow:
+      description: Puts glowstone above your head.
+      usage: /<command>
+    jungle:
+      description: Spawn a jungle log 2 blocks in the X direction.
+      usage: /<command>
+    jockey:
+      description: Spawn spider jockey.
+      usage: /<command>
+    nv:
+      description: Gives you nightvision.
+      usage: /<command>
+    color:
+      description: Selects a default color.
+      usage: /<command>

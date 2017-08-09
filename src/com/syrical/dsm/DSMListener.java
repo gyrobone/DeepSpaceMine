@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class DSMListener implements Listener {
 
@@ -40,6 +42,8 @@ public class DSMListener implements Listener {
 			player.sendMessage("Welcome back to the server!");
 			
 		}
+		
+		player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 600, 1));
 		
 	}
 	
