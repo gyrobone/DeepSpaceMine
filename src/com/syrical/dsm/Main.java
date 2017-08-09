@@ -1,7 +1,10 @@
 package com.syrical.dsm;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -40,8 +43,7 @@ public class Main extends JavaPlugin {
 				//test command, remove later
 				case "givesword":
 					
-					Player player = (Player) sender; 
-					
+					Player p2 = (Player) sender; 
 					int length = args.length;
 					
 					switch (length) {
@@ -49,23 +51,40 @@ public class Main extends JavaPlugin {
 						case 1:
 							if ( args[0].equalsIgnoreCase("2") ) {
 								ItemStack sword = new ItemStack(Material.IRON_SWORD, 2);
-								player.getInventory().addItem(sword);
-								player.sendMessage("Here are your swords.");
+								p2.getInventory().addItem(sword);
+								p2.sendMessage("Here are your swords.");
 								return true;
 							} else {
-								player.sendMessage("Invalid arguments.");
+								p2.sendMessage(ChatColor.RED + "Invalid arguments.");
 								return true;
 							}
 						case 0:
 							ItemStack sword = new ItemStack(Material.IRON_SWORD, 1);
-							player.getInventory().addItem(sword);
-							player.sendMessage("Here is your sword.");
+							p2.getInventory().addItem(sword);
+							p2.sendMessage("Here is your sword.");
 							return true;
 						default:
-							player.sendMessage("Your command was not recognized");
-							return true;
+							p2.sendMessage("Your command was not recognized");
+							return true;		
 							
 					}
+				
+				case "netherportal":
+					
+					Player p3 = (Player) sender;
+					World nether = Bukkit.getServer().getWorld("world_nether");
+					Location loc = new Location(nether, 3, 73, 34);
+					
+					p3.teleport(loc);
+					return true;
+				
+				case "spawn":
+					
+					Player p4 =(Player) sender;
+					World world = Bukkit.getServer().getWorld("world");
+					Location loc2 = new Location(world, 80, 76, 248);
+					
+					p4.teleport(loc2);
 					
 				default:
 					

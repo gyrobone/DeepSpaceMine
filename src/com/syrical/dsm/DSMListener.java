@@ -43,4 +43,42 @@ public class DSMListener implements Listener {
 		
 	}
 	
+	//When player gets hit by other entity
+	/* @EventHandler
+	public void onPlayerDamage(EntityDamageByEntityEvent event) {
+		
+		Entity entity = event.getEntity();
+		
+		if (entity instanceof Player) {
+			
+			Player player = (Player) entity;
+			
+			Location playerLoc = player.getLocation();
+			Location loc = playerLoc.add(10, 0, 0);
+			
+			player.teleport(loc);
+			
+		} 
+		
+	}
+	*/
+	
+	//When zombie gets hit by player
+	/* @EventHandler
+	public void onEntityDamage(EntityDamageByEntityEvent event) {
+		
+		Entity entity = event.getEntity();
+		
+		if (entity instanceof Zombie) {
+			
+			World world = entity.getWorld();
+			Location loc = new Location(world, 10, 10, 10);
+			
+			entity.teleport(loc);
+			
+		}
+		
+	}
+	*/
+	
 }

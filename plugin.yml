@@ -5,3 +5,9 @@ commands:
     givesword:
       description: Gives a sword.
       usage: /<command>
+    netherportal:
+      description: Teleports you to the nether in front of the portal.
+      usage: /<command>
+    spawn:
+      description: Teleports you to spawn.
+      usage: /<command>

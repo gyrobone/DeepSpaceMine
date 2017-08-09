@@ -31,7 +31,7 @@ public class ItemSmith {
 		
 	}
 	
-	public ItemStack buildWeapon(int amount) {
+	public ItemStack noobspick(int amount) {
 		
 		Material m = Material.STONE_PICKAXE;
 		String name = (ChatColor.GRAY + "Noob's Pickaxe");
