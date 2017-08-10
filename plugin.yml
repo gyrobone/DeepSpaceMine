@@ -35,6 +35,12 @@ commands:
     gui:
       description: Opens GUI.
       usage: /<command>
+    gatecalibration:
+      description: Checks multiblocks.
+      usage: /<command>
+    gatewarp:
+      description: Warps to location.
+      usage: /<command>
 permissions:
     dsm.*:
       description: Permission for all commands.

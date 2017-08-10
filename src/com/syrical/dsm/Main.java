@@ -1,5 +1,9 @@
 package com.syrical.dsm;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.WeakHashMap;
 
 import org.bukkit.Bukkit;
@@ -8,6 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -25,13 +30,15 @@ public class Main extends JavaPlugin {
 	
 	String color = "red";
 	WeakHashMap<Location, String> selections = new WeakHashMap<Location, String>();
+	PluginManager pm = getServer().getPluginManager();
+	DSMListener listener = new DSMListener(this);
+	public static GateCalibrationListen GCListen = new GateCalibrationListen(null);
+	public static GateWarpListen GWListen = new GateWarpListen(null);
 	
 	@Override
 	public void onEnable() {
 		
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "DeepSpaceMine has been enabled");
-		PluginManager pm = getServer().getPluginManager();
-		DSMListener listener = new DSMListener(this);
 		pm.registerEvents(listener, this);
 		
 		if (getConfig().getString("color") == null) {
@@ -49,15 +56,103 @@ public class Main extends JavaPlugin {
 		
 	}
 	
+	public ArrayList<Block> getSurrounding(Block b) {
+		
+		ArrayList<Block> blocks = new ArrayList<Block>();
+		BlockFace[] faces = new BlockFace[] {
+				BlockFace.UP,
+				BlockFace.DOWN,
+				BlockFace.NORTH,
+				BlockFace.SOUTH,
+				BlockFace.EAST,
+				BlockFace.WEST
+		};
+		
+		Material[] list = new Material[] {
+				Material.AIR,
+				Material.GRASS,
+				Material.DIRT,
+				Material.GRAVEL,
+				Material.STONE,
+				Material.BEDROCK,
+				Material.GRAVEL,
+				Material.SAND,
+				Material.LEAVES,
+				Material.STATIONARY_LAVA,
+				Material.STATIONARY_WATER,
+				Material.WATER,
+				Material.LAVA
+		};
+		
+		List<Material> banned = Arrays.asList(list);
+		
+		for(BlockFace f:faces) {
+			
+			Block s = b.getRelative(f);
+			if (banned.contains(s.getType())) continue;
+			blocks.add(s);
+					
+		}
+		
+		return blocks;
+	}
+	
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		
 		if (sender instanceof Player) {
 			
 			String lowerCmd = cmd.getName().toLowerCase();
+			/*Player player = (Player) sender;
+			Block block = player.getTargetBlock((HashSet<Byte>) null, 200);
+			ArrayList<Block> found = new ArrayList<Block>();
+			ArrayList<Block> search_blocks = new ArrayList<Block>();
+			ArrayList<Block> to_search = new ArrayList<Block>();
+			search_blocks.add(block);
 			
+			while(true) {
+				to_search.clear();
+				for(Block b2:search_blocks) {
+					if(!found.contains(b2)) {
+						found.add(b2);
+					}
+					ArrayList<Block> fetched = getSurrounding(b2);
+					for(Block b3:fetched) {
+						if(found.contains(b3) || to_search.contains(b3)) continue;
+						to_search.add(b3);
+					}
+				}
+				if(to_search.size() == 0) {
+					break;
+				} else {
+					search_blocks.clear();
+					search_blocks.addAll(to_search);
+					to_search.clear();
+				}
+			}
+			
+			for(Block b4:found) {
+				b4.setType(Material.WOOD);
+			}
+			*/
 			switch (lowerCmd) {
+				
+				case "gatewarp":
+				
+					Player p13 = (Player) sender;
+				
+					p13.sendMessage(ChatColor.GREEN + "Click sign to warp");
+					pm.registerEvents(GWListen, this);
+					return true;
 			
+				case "gatecalibration":
+					
+					Player p1 = (Player) sender;
+					
+					p1.sendMessage(ChatColor.GREEN + "Place sign to calibrate gate");
+					pm.registerEvents(GCListen, this);
+					return true;
+					
 				//test command, remove later
 				case "givesword":
 					
@@ -134,8 +229,8 @@ public class Main extends JavaPlugin {
 					if (blockLoc2.getBlock().getType().equals(Material.AIR)) {
 						
 						Block jungle = blockLoc2.getBlock();
-						jungle.setType(Material.LOG);
-						jungle.setData((byte) 3);
+						jungle.setType(Material.SIGN_POST);
+						//jungle.setData((byte) 3);
 						return true;
 						
 					} else {
@@ -251,21 +346,21 @@ public class Main extends JavaPlugin {
 					for ( Location loc3 : selections.keySet() ) {
 						
 						String color = selections.get(loc3);
-						Block block = loc3.getBlock();
+						Block b = loc3.getBlock();
 						
 						switch (color.toLowerCase()) {
 						
 							case "blue":
-								block.setType(Material.WOOL);
-								block.setData((byte) 11);
+								b.setType(Material.WOOL);
+								b.setData((byte) 11);
 								break;
 							case "red":
-								block.setType(Material.WOOL);
-								block.setData((byte) 14);
+								b.setType(Material.WOOL);
+								b.setData((byte) 14);
 								break;
 							case "yellow":
-								block.setType(Material.WOOL);
-								block.setData((byte) 4);
+								b.setType(Material.WOOL);
+								b.setData((byte) 4);
 								break;
 								
 						}
