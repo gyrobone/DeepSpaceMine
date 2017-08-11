@@ -107,10 +107,10 @@ public class GateCheck implements Listener {
 		
 				p.sendMessage(ChatColor.GREEN + "Tier 1");
 			
-				if (b.getType() == Material.STAINED_GLASS_PANE) {
+				if (b.getType() == Material.STAINED_GLASS_PANE) {	
 						
 					
-					if (playerface == "North") {
+					if ((playerface == "North") || (playerface == "South")) {
 						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.IRON_BLOCK)) {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(0,0,1).getBlock();
@@ -120,17 +120,7 @@ public class GateCheck implements Listener {
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
-					} else if (playerface == "South") {
-						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.IRON_BLOCK)) {
-							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
-								Block newSign = b.getLocation().add(0,0,-1).getBlock();
-								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.GREEN + "Active");
-								s2.update();
-								HandlerList.unregisterAll(Main.gcheck);
-							}
-						}
-					} else if (playerface == "East") {
+					} else if ((playerface == "East") || (playerface == "West")) {
 						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.IRON_BLOCK)) {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(-1,0,0).getBlock();
@@ -140,30 +130,22 @@ public class GateCheck implements Listener {
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
-					} else if (playerface == "West") {
-						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.IRON_BLOCK)) {
-							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
-								Block newSign = b.getLocation().add(1,0,0).getBlock();
-								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.GREEN + "Active");
-								s2.update();
-								HandlerList.unregisterAll(Main.gcheck);
-							}
-						}
-					} 
-			
-				} else {
+					} else {
 			
 					p.sendMessage(ChatColor.RED + "Missing Glass");
 					HandlerList.unregisterAll(Main.gcheck);
 			
-				}
+					}
 		
+			} else {
+				HandlerList.unregisterAll(Main.gcheck);
+			}
+		
+		} else {
+			HandlerList.unregisterAll(Main.gcheck);
 		}
 		
-		HandlerList.unregisterAll(Main.GCListen);
 		return null;
-		
 	}
 	
 	/* public GateCalibrationListen checkT2 (String playerface, Player p, Location loc, Boolean active) {
