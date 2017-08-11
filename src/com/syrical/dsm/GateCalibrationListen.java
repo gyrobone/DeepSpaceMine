@@ -11,8 +11,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-
-
 public class GateCalibrationListen implements Listener {
 	
 	public GateCalibrationListen(Main plugin) {
@@ -21,37 +19,129 @@ public class GateCalibrationListen implements Listener {
 		
 	}
 	
+	public GateCalibrationListen  onCheck (String playerface, Player p, Location loc) {
+		
+		Block b = loc.getBlock();
+		Location bLoc = b.getLocation();
+		
+		if (b.getType() == Material.STONE) {
+			
+			if (playerface == "North") {
+				
+				if (bLoc.add(0,0,-1).getBlock().getType() == Material.SPONGE) {
+					
+					Location bLoc2 = bLoc.add(0,0,-1);
+					Block b2 = bLoc2.getBlock();
+					p.sendMessage(ChatColor.GREEN + "Sponge is North");
+					
+					if (b2.getType() == Material.ANVIL) {
+						p.sendMessage(ChatColor.GREEN + "Anvil is North");
+					} else {
+						p.sendMessage(ChatColor.RED + "Missing Anvil");
+					}
+					
+				} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
+					p.sendMessage(ChatColor.RED + "Missing Sponge");
+				}
+				
+			} else if (playerface == "South") {
+				
+				
+				if (bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE) {
+					
+					Location bLoc2 = bLoc.add(0,0,1);
+					Block b2 = bLoc2.getBlock();
+					p.sendMessage(ChatColor.GREEN + "Sponge is South");
+					
+					if (b2.getType() == Material.ANVIL) {
+						p.sendMessage(ChatColor.GREEN + "Anvil is South");
+					} else {
+						p.sendMessage(ChatColor.RED + "Missing Anvil");
+					}
+					
+				} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
+					p.sendMessage(ChatColor.RED + "Missing Sponge");
+				}
+				
+			} else if (playerface == "East") {
+				
+				if (bLoc.add(1,0,0).getBlock().getType() == Material.SPONGE) {
+					
+					Location bLoc2 = bLoc.add(1,0,0);
+					Block b2 = bLoc2.getBlock();
+					p.sendMessage(ChatColor.GREEN + "Sponge is East");
+					
+					if (b2.getType() == Material.ANVIL) {
+						p.sendMessage(ChatColor.GREEN + "Anvil is East");
+					} else {
+						p.sendMessage(ChatColor.RED + "Missing Anvil");
+					}
+					
+				} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
+					p.sendMessage(ChatColor.RED + "Missing Sponge");
+				}
+				
+			} else if (playerface == "West") {
+				
+				if (bLoc.add(-1,0,0).getBlock().getType() == Material.SPONGE) {
+					
+					Location bLoc2 = bLoc.add(-1,0,0);
+					Block b2 = bLoc2.getBlock();
+					p.sendMessage(ChatColor.GREEN + "Sponge is West");
+					
+					if (b2.getType() == Material.ANVIL) {
+						p.sendMessage(ChatColor.GREEN + "Anvil is West");
+					} else {
+						p.sendMessage(ChatColor.RED + "Missing Anvil");
+					}
+					
+				} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
+					p.sendMessage(ChatColor.RED + "Missing Sponge");
+				}
+				
+			} 
+			
+		} else {
+			
+			p.sendMessage(ChatColor.RED + "Missing Stone");
+			
+		}
+		
+		
+		
+		HandlerList.unregisterAll(Main.GCListen);
+		return null;
+		
+	}
+	
 	@EventHandler
-	public void onBlockPlace (BlockPlaceEvent e) {
+	public GateCalibrationListen onSignPlace (BlockPlaceEvent event) {
 		
-		Player p = (Player) e.getPlayer();
-		Block b = e.getBlock();
-		Material blockN = b.getRelative(BlockFace.NORTH).getType();
-		Material blockS = b.getRelative(BlockFace.SOUTH).getType();
-		Material blockE = b.getRelative(BlockFace.EAST).getType();
-		Material blockW = b.getRelative(BlockFace.WEST).getType();
-		Location spongelocN = b.getLocation().add(0,0,-1);
-		Location spongelocS = b.getLocation().add(0,0,1);
-		Location spongelocE = b.getLocation().add(1,0,0);
-		Location spongelocW = b.getLocation().add(-1,0,0);
-		Block spongeblockN = spongelocN.getBlock();
-		Block spongeblockS = spongelocS.getBlock();
-		Block spongeblockE = spongelocE.getBlock();
-		Block spongeblockW = spongelocW.getBlock();
-		Material sponge = Material.SPONGE;
+		Player player = (Player) event.getPlayer();
+		Block block = event.getBlock();
 		
-		if (b.getType() == Material.WALL_SIGN) {
-		
-			if (blockN == sponge ) {
-		
+		if (block.getType() == Material.WALL_SIGN || block.getType() == Material.SIGN_POST) {
+			
+			org.bukkit.material.Sign sign = (org.bukkit.material.Sign) block.getState().getData();
+			BlockFace facing = sign.getFacing();
+			
+			if (facing == BlockFace.NORTH) {
+				return onCheck("South", player, block.getLocation().add(0,0,1));
+			} else if (facing == BlockFace.SOUTH) {
+				return onCheck("North", player, block.getLocation().add(0,0,-1));
+			} else if (facing == BlockFace.EAST) {
+				return onCheck("West", player, block.getLocation().add(-1,0,0));
+			} else if (facing == BlockFace.WEST) {
+				return onCheck("East", player, block.getLocation().add(1,0,0));
 			}
 			
 		} else {
 			
-			p.sendMessage(ChatColor.RED + "MultiBlock Failed!");
-			HandlerList.unregisterAll(Main.GCListen);
+			player.sendMessage(ChatColor.RED + "Wrong Block");
 			
 		}
+
+		return null;
 		
 	}
 	
