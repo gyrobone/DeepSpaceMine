@@ -12,9 +12,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 
 
-public class GateWarpListen implements Listener {
+public class GateWarp implements Listener {
 
-	public GateWarpListen(Main plugin) {
+	public GateWarp(Main plugin) {
 		
 		
 		
@@ -27,29 +27,25 @@ public class GateWarpListen implements Listener {
 		Block b = e.getClickedBlock();
 		Material block = b.getType();
 		
-		if (block.equals(Material.SIGN_POST) || block.equals(Material.WALL_SIGN)|| block.equals(Material.SIGN)) {
-			
+		if (block.equals(Material.WALL_SIGN)) {
+				
 			Sign s = (Sign) b.getState();
 			String[] ln = s.getLines();
-
-			if (ln[0].toLowerCase().equalsIgnoreCase("[Nether]")) {
+				
+			if (ln[1].toLowerCase().equalsIgnoreCase(ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active")) {
 					
 				p.sendMessage("poop");
-				HandlerList.unregisterAll(Main.GWListen);
-					
+				HandlerList.unregisterAll(Main.gwarp);
+						
 			} else {
-				
+					
 				p.sendMessage(ChatColor.RED + "Invalid Warp");
-				HandlerList.unregisterAll(Main.GWListen);
-				
+				HandlerList.unregisterAll(Main.gwarp);
+					
 			}
 			
-		} else {
-			
-			p.sendMessage(ChatColor.RED + "Invalid Block");
-			HandlerList.unregisterAll(Main.GWListen);
-			
 		}
+		
 	}
 	
 }

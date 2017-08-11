@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
 	DSMListener listener = new DSMListener(this);
 	public static GateCheck gcheck = new GateCheck(null);
 	public static GateCalibrationListen GCListen = new GateCalibrationListen(null);
-	public static GateWarpListen GWListen = new GateWarpListen(null);
+	public static GateWarp gwarp = new GateWarp(null);
 	
 	@Override
 	public void onEnable() {
@@ -142,14 +142,14 @@ public class Main extends JavaPlugin {
 					Player p13 = (Player) sender;
 				
 					p13.sendMessage(ChatColor.GREEN + "Click sign to warp");
-					pm.registerEvents(GWListen, this);
+					pm.registerEvents(gwarp, this);
 					return true;
 			
 				case "gatecalibration":
 					
 					Player p1 = (Player) sender;
 					
-					p1.sendMessage(ChatColor.GREEN + "Place sign to calibrate gate");
+					p1.sendMessage(ChatColor.GREEN + "Click sign that you want to calibrate");
 					pm.registerEvents(gcheck, this);
 					return true;
 					

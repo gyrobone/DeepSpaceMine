@@ -110,34 +110,55 @@ public class GateCheck implements Listener {
 				if (b.getType() == Material.STAINED_GLASS_PANE) {	
 						
 					
-					if ((playerface == "North") || (playerface == "South")) {
+					if ((playerface == "North")) {
 						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.IRON_BLOCK)) {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(0,0,1).getBlock();
 								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.GREEN + "Active");
+								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
 								s2.update();
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
-					} else if ((playerface == "East") || (playerface == "West")) {
+					} else if(playerface == "South") {
+						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.IRON_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
+								Block newSign = b.getLocation().add(0,0,-1).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.update();
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if ((playerface == "East")) {
 						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.IRON_BLOCK)) {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(-1,0,0).getBlock();
 								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.GREEN + "Active");
+								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.update();
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if(playerface == "West") {
+						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.IRON_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
+								Block newSign = b.getLocation().add(1,0,0).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
 								s2.update();
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
 					} else {
 			
-					p.sendMessage(ChatColor.RED + "Missing Glass");
-					HandlerList.unregisterAll(Main.gcheck);
-			
+						
+						HandlerList.unregisterAll(Main.gcheck);
+					
 					}
 		
 			} else {
+				p.sendMessage(ChatColor.RED + "Missing Glass");
 				HandlerList.unregisterAll(Main.gcheck);
 			}
 		
