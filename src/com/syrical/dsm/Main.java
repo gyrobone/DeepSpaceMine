@@ -31,6 +31,7 @@ public class Main extends JavaPlugin {
 	WeakHashMap<Location, String> selections = new WeakHashMap<Location, String>();
 	PluginManager pm = getServer().getPluginManager();
 	DSMListener listener = new DSMListener(this);
+	public static GateCheck gcheck = new GateCheck(null);
 	public static GateCalibrationListen GCListen = new GateCalibrationListen(null);
 	public static GateWarpListen GWListen = new GateWarpListen(null);
 	
@@ -149,7 +150,7 @@ public class Main extends JavaPlugin {
 					Player p1 = (Player) sender;
 					
 					p1.sendMessage(ChatColor.GREEN + "Place sign to calibrate gate");
-					pm.registerEvents(GCListen, this);
+					pm.registerEvents(gcheck, this);
 					return true;
 					
 				//test command, remove later

@@ -1,0 +1,15 @@
+0,0North:
+	Left -x
+	Right +x
+
+South:
+	Left +x
+	Right -x
+
+East:
+	Left -z
+	Right +z
+
+West:
+	Left +z
+	Right -z

@@ -135,10 +135,6 @@ public class GateCalibrationListen implements Listener {
 				return onCheck("East", player, block.getLocation().add(1,0,0));
 			}
 			
-		} else {
-			
-			player.sendMessage(ChatColor.RED + "Wrong Block");
-			
 		}
 
 		return null;
