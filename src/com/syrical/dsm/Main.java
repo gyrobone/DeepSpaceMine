@@ -44,7 +44,6 @@ public class Main extends JavaPlugin {
 	public void onDisable() {
 		
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "DeepSpaceMine has been disabled");
-		//SLAPI.saveBalances();
 		
 	}
 	
