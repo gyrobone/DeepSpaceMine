@@ -1,4 +1,4 @@
-name: Syrical
+name: DeepSpaceMine
 main: com.syrical.dsm.Main
 version: 1.0 Alpha
 commands:
