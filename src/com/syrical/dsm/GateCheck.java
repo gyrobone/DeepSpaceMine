@@ -43,9 +43,7 @@ public class GateCheck implements Listener {
 					return checkT1("East", p, b.getLocation().add(1,0,0), true);
 				}
 	
-			} /* else if (ln[0].toLowerCase().equalsIgnoreCase("[Tier 2]")) {
-				
-				p.sendMessage(ChatColor.GREEN + "Tier 2");
+			} else if (ln[0].toLowerCase().equalsIgnoreCase("[Tier 2]")) {
 				
 				if (facing == BlockFace.NORTH) {
 					return checkT2("South", p, b.getLocation().add(0,0,1), true);
@@ -59,8 +57,6 @@ public class GateCheck implements Listener {
 	
 			} else if (ln[0].toLowerCase().equalsIgnoreCase("[Tier 3]")) {
 				
-				p.sendMessage(ChatColor.GREEN + "Tier 3");
-				
 				if (facing == BlockFace.NORTH) {
 					return checkT3("South", p, b.getLocation().add(0,0,1), true);
 				} else if (facing == BlockFace.SOUTH) {
@@ -73,8 +69,6 @@ public class GateCheck implements Listener {
 	
 			} else if (ln[0].toLowerCase().equalsIgnoreCase("[Tier 4]")) {
 				
-				p.sendMessage(ChatColor.GREEN + "Tier 4");
-				
 				if (facing == BlockFace.NORTH) {
 					return checkT4("South", p, b.getLocation().add(0,0,1), true);
 				} else if (facing == BlockFace.SOUTH) {
@@ -85,9 +79,7 @@ public class GateCheck implements Listener {
 					return checkT4("East", p, b.getLocation().add(1,0,0), true);
 				}
 	
-			} else {
-				
-			} */
+			} 
 			
 		} else if (b.getType() != Material.WALL_SIGN) {
 			p.sendMessage(ChatColor.RED + "Not a sign");
@@ -104,19 +96,16 @@ public class GateCheck implements Listener {
 		Block b = loc.getBlock();
 		
 		if (active == true) {
-		
-				p.sendMessage(ChatColor.GREEN + "Tier 1");
-			
 				if (b.getType() == Material.STAINED_GLASS_PANE) {	
-						
-					
 					if ((playerface == "North")) {
 						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.IRON_BLOCK)) {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(0,0,1).getBlock();
 								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
 								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 1 Gate built successfully!");
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
@@ -125,8 +114,10 @@ public class GateCheck implements Listener {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(0,0,-1).getBlock();
 								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
 								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 1 Gate built successfully!");
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
@@ -135,8 +126,10 @@ public class GateCheck implements Listener {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(-1,0,0).getBlock();
 								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
 								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 1 Gate built successfully!");
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
@@ -145,319 +138,227 @@ public class GateCheck implements Listener {
 							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.IRON_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.IRON_BLOCK)) {
 								Block newSign = b.getLocation().add(1,0,0).getBlock();
 								Sign s2 = (Sign) newSign.getState();
-								s2.setLine(1, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
 								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 1 Gate built successfully!");
 								HandlerList.unregisterAll(Main.gcheck);
 							}
 						}
 					} else {
-			
-						
 						HandlerList.unregisterAll(Main.gcheck);
-					
 					}
-		
 			} else {
 				p.sendMessage(ChatColor.RED + "Missing Glass");
 				HandlerList.unregisterAll(Main.gcheck);
 			}
-		
 		} else {
 			HandlerList.unregisterAll(Main.gcheck);
 		}
-		
 		return null;
 	}
 	
-	/* public GateCalibrationListen checkT2 (String playerface, Player p, Location loc, Boolean active) {
+	public GateCalibrationListen checkT2 (String playerface, Player p, Location loc, Boolean active) {
 	
-	Block b = loc.getBlock();
-	Location bLoc = b.getLocation();
+		Block b = loc.getBlock();
 	
-	if (active == true) {
+		if (active == true) {
 	
-	if (b.getType() == Material.SMOOTH_BRICK) {
+			if (b.getType() == Material.STAINED_GLASS_PANE) {
 		
-		if (playerface == "North") {
-			
-			if (bLoc.add(0,0,-1).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(0,0,-1);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is North");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is North");
+				if ((playerface == "North")) {
+					if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+						if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+							Block newSign = b.getLocation().add(0,0,1).getBlock();
+							Sign s2 = (Sign) newSign.getState();
+							s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+							s2.setLine(3, "§kWorking");
+							s2.update();
+							p.sendMessage(ChatColor.GREEN + "Tier 2 Gate built successfully!");
+							HandlerList.unregisterAll(Main.gcheck);
+						}
+					}
+				} else if(playerface == "South") {
+					if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+						if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+							Block newSign = b.getLocation().add(0,0,-1).getBlock();
+							Sign s2 = (Sign) newSign.getState();
+							s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+							s2.setLine(3, "§kWorking");
+							s2.update();
+							p.sendMessage(ChatColor.GREEN + "Tier 2 Gate built successfully!");
+							HandlerList.unregisterAll(Main.gcheck);
+						}
+					}
+				} else if ((playerface == "East")) {
+					if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+						if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+							Block newSign = b.getLocation().add(-1,0,0).getBlock();
+							Sign s2 = (Sign) newSign.getState();
+							s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+							s2.setLine(3, "§kWorking");
+							s2.update();
+							p.sendMessage(ChatColor.GREEN + "Tier 2 Gate built successfully!");
+							HandlerList.unregisterAll(Main.gcheck);
+						}
+					}
+				} else if(playerface == "West") {
+					if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+						if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.REDSTONE_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.REDSTONE_BLOCK)) {
+							Block newSign = b.getLocation().add(1,0,0).getBlock();
+							Sign s2 = (Sign) newSign.getState();
+							s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+							s2.setLine(3, "§kWorking");
+							s2.update();
+							p.sendMessage(ChatColor.GREEN + "Tier 2 Gate built successfully!");
+							HandlerList.unregisterAll(Main.gcheck);
+						}
+					}
 				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
+					HandlerList.unregisterAll(Main.gcheck);
 				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
+			} else {
+				p.sendMessage(ChatColor.RED + "Missing Glass");
+				HandlerList.unregisterAll(Main.gcheck);
 			}
-			
-		} else if (playerface == "South") {
-			
-			
-			if (bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(0,0,1);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is South");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is South");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "East") {
-			
-			if (bLoc.add(1,0,0).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(1,0,0);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is East");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is East");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "West") {
-			
-			if (bLoc.add(-1,0,0).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(-1,0,0);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is West");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is West");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} 
-		
-	} else {
-		
-		p.sendMessage(ChatColor.RED + "Missing Stone");
-		
+		} else {
+			HandlerList.unregisterAll(Main.gcheck);
+		}
+		return null;
 	}
 	
-	}
-	
-	HandlerList.unregisterAll(Main.GCListen);
-	return null;
-	
-	}
-
 	public GateCalibrationListen checkT3 (String playerface, Player p, Location loc, Boolean active) {
-	
-	Block b = loc.getBlock();
-	Location bLoc = b.getLocation();
-	
-	if (active == true) {
-	
-	if (b.getType() == Material.SMOOTH_BRICK) {
 		
-		if (playerface == "North") {
-			
-			if (bLoc.add(0,0,-1).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(0,0,-1);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is North");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is North");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "South") {
-			
-			
-			if (bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(0,0,1);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is South");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is South");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "East") {
-			
-			if (bLoc.add(1,0,0).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(1,0,0);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is East");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is East");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "West") {
-			
-			if (bLoc.add(-1,0,0).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(-1,0,0);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is West");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is West");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} 
+		Block b = loc.getBlock();
 		
-	} else {
-		
-		p.sendMessage(ChatColor.RED + "Missing Stone");
-		
+		if (active == true) {
+				if (b.getType() == Material.STAINED_GLASS_PANE) {	
+					if ((playerface == "North")) {
+						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.GOLD_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.GOLD_BLOCK)) {
+								Block newSign = b.getLocation().add(0,0,1).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 3 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if(playerface == "South") {
+						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.GOLD_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.GOLD_BLOCK)) {
+								Block newSign = b.getLocation().add(0,0,-1).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 3 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if ((playerface == "East")) {
+						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.GOLD_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.GOLD_BLOCK)) {
+								Block newSign = b.getLocation().add(-1,0,0).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 3 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if(playerface == "West") {
+						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.GOLD_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.GOLD_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.GOLD_BLOCK)) {
+								Block newSign = b.getLocation().add(1,0,0).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 3 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else {
+						HandlerList.unregisterAll(Main.gcheck);
+					}
+			} else {
+				p.sendMessage(ChatColor.RED + "Missing Glass");
+				HandlerList.unregisterAll(Main.gcheck);
+			}
+		} else {
+			HandlerList.unregisterAll(Main.gcheck);
+		}
+		return null;
 	}
 	
-	}
-	
-	HandlerList.unregisterAll(Main.GCListen);
-	return null;
-	
-	}
-
 	public GateCalibrationListen checkT4 (String playerface, Player p, Location loc, Boolean active) {
-	
-	Block b = loc.getBlock();
-	Location bLoc = b.getLocation();
-	
-	if (active == true) {
-	
-	if (b.getType() == Material.SMOOTH_BRICK) {
 		
-		if (playerface == "North") {
-			
-			if (bLoc.add(0,0,-1).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(0,0,-1);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is North");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is North");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "South") {
-			
-			
-			if (bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(0,0,1);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is South");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is South");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "East") {
-			
-			if (bLoc.add(1,0,0).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(1,0,0);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is East");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is East");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} else if (playerface == "West") {
-			
-			if (bLoc.add(-1,0,0).getBlock().getType() == Material.SPONGE) {
-				
-				Location bLoc2 = bLoc.add(-1,0,0);
-				Block b2 = bLoc2.getBlock();
-				p.sendMessage(ChatColor.GREEN + "Sponge is West");
-				
-				if (b2.getType() == Material.ANVIL) {
-					p.sendMessage(ChatColor.GREEN + "Anvil is West");
-				} else {
-					p.sendMessage(ChatColor.RED + "Missing Anvil");
-				}
-				
-			} else if (!(bLoc.add(0,0,1).getBlock().getType() == Material.SPONGE)) {
-				p.sendMessage(ChatColor.RED + "Missing Sponge");
-			}
-			
-		} 
+		Block b = loc.getBlock();
 		
-	} else {
-		
-		p.sendMessage(ChatColor.RED + "Missing Stone");
-		
+		if (active == true) {
+				if (b.getType() == Material.STAINED_GLASS_PANE) {	
+					if ((playerface == "North")) {
+						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+								Block newSign = b.getLocation().add(0,0,1).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 4 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if(playerface == "South") {
+						if ((b.getLocation().add(-1,0,0).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(1,0,0).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+								Block newSign = b.getLocation().add(0,0,-1).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 4 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if ((playerface == "East")) {
+						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+								Block newSign = b.getLocation().add(-1,0,0).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 4 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else if(playerface == "West") {
+						if ((b.getLocation().add(0,0,1).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(0,0,-1).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+							if ((b.getLocation().add(0,1,0).getBlock().getType() == Material.DIAMOND_BLOCK) && (b.getLocation().add(0,-1,0).getBlock().getType() == Material.DIAMOND_BLOCK)) {
+								Block newSign = b.getLocation().add(1,0,0).getBlock();
+								Sign s2 = (Sign) newSign.getState();
+								s2.setLine(2, ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active");
+								s2.setLine(3, "§kWorking");
+								s2.update();
+								p.sendMessage(ChatColor.GREEN + "Tier 4 Gate built successfully!");
+								HandlerList.unregisterAll(Main.gcheck);
+							}
+						}
+					} else {
+						HandlerList.unregisterAll(Main.gcheck);
+					}
+			} else {
+				p.sendMessage(ChatColor.RED + "Missing Glass");
+				HandlerList.unregisterAll(Main.gcheck);
+			}
+		} else {
+			HandlerList.unregisterAll(Main.gcheck);
+		}
+		return null;
 	}
 	
-	}
-	
-	HandlerList.unregisterAll(Main.GCListen);
-	return null;
-	
-	}
-	*/
 }

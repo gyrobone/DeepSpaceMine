@@ -2,44 +2,23 @@ name: Syrical
 main: com.syrical.dsm.Main
 version: 1.0 Alpha
 commands:
-    givesword:
-      description: Gives a sword.
-      usage: /<command>
     netherportal:
-      description: Teleports you to the nether in front of the portal.
+      description: Teleports you to the nether.
       usage: /<command>
     spawn:
       description: Teleports you to spawn.
-      usage: /<command>
-    glow:
-      description: Puts glowstone above your head.
-      usage: /<command>
-    jungle:
-      description: Spawn a jungle log 2 blocks in the X direction.
-      usage: /<command>
-    jockey:
-      description: Spawn spider jockey.
-      usage: /<command>
-    nv:
-      description: Gives you nightvision.
-      usage: /<command>
-    color:
-      description: Selects a default color.
-      usage: /<command>
-    tag:
-      description: Tags a block with a color.
-      usage: /<command>
-    colorify:
-      description: Colors tagged blocks.
-      usage: /<command>
-    gui:
-      description: Opens GUI.
       usage: /<command>
     gatecalibration:
       description: Checks multiblocks.
       usage: /<command>
     gatewarp:
       description: Warps to location.
+      usage: /<command>
+    carinus:
+      description: TPs player to Carinus
+      usage: /<command>
+    menu:
+      description: Open Sell Menu
       usage: /<command>
 permissions:
     dsm.*:
