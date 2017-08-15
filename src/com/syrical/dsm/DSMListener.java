@@ -90,14 +90,11 @@ public class DSMListener implements Listener {
 		Inventory inventory = event.getInventory();
 		
 		if (inventory.getName().equals("DSM GUI") && event.getSlotType() != SlotType.OUTSIDE) {
-			
-			ItemSmith smithy = new ItemSmith();
 			ItemStack clicked = event.getCurrentItem();
 			Material clickedType = clicked.getType();
 			
 			if (clickedType == Material.STONE_PICKAXE) {
 				
-				player.getInventory().addItem(smithy.noobspick(1));
 				player.sendMessage("You've been given the Noob's Pickaxe!");
 				
 			} else if (clickedType == Material.IRON_SWORD) {

@@ -251,27 +251,6 @@ public class Main extends JavaPlugin {
 					
 					p11.sendMessage("Your blocks have been colorified");
 					return true;
-				
-				case "gui":
-					
-					Player p12 = (Player) sender;
-					
-					if (p12.hasPermission("dsm.gui")) {
-						
-						boolean success = DSMGUI.openGUI(p12);
-						if (!success) {
-							
-							p12.sendMessage(ChatColor.RED + "Could not open GUI");
-							
-						}
-						
-					} else {
-						
-						p12.sendMessage(ChatColor.RED + "You do not have permission to use this");
-						
-					}
-					
-					return true;
 					
 				default:
 					
