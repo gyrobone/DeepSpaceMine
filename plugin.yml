@@ -9,9 +9,11 @@ commands:
       description: Teleports you to spawn.
       usage: /<command>
     gatecalibration:
+      aliases: [gc]
       description: Checks multiblocks.
       usage: /<command>
     gatewarp:
+      aliases: [gw]
       description: Warps to location.
       usage: /<command>
     wtp:

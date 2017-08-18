@@ -11,16 +11,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 
 
 public class GateWarp implements Listener {
 
-	public GateWarp(Main plugin) {
+	public String planet;
+	public String defaultPlanet = "world";
+	
+	public GateWarp(Main plugin, String planet) {
 		
-		
-		
+		this.planet = planet;
 	}
 	
 	@EventHandler
@@ -33,7 +36,7 @@ public class GateWarp implements Listener {
 		World Damara = Bukkit.getWorld("world_damara");
 		World Sirona = Bukkit.getWorld("world_sirona");
 		
-				
+		if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;		
 		
 		if (b.getType() == Material.WALL_SIGN) {
 				
@@ -41,7 +44,7 @@ public class GateWarp implements Listener {
 			
 			if (s.getLine(2).toLowerCase().equalsIgnoreCase(ChatColor.DARK_GREEN + ""+ ChatColor.BOLD + "Active")) {
 				if (s.getLine(0).toLowerCase().equalsIgnoreCase("[Tier 1]")) {	
-					if (s.getLine(1).toLowerCase().equalsIgnoreCase("Carinus")) {
+					if (planet.equalsIgnoreCase("Carinus")) {
 						if (Carinus == null) {
 							WorldCreator creator = new WorldCreator("world_carinus");
 							creator.environment(World.Environment.NORMAL);
@@ -51,7 +54,7 @@ public class GateWarp implements Listener {
 						p.teleport(Carinus.getSpawnLocation());
 						p.sendMessage("Welcome to: " + ChatColor.GREEN + "Carinus");
 						HandlerList.unregisterAll(Main.gwarp);
-					} else if (s.getLine(1).toLowerCase().equalsIgnoreCase("Opia 3")) {
+					} else if (planet.equalsIgnoreCase("Opia3")) {
 						if (Opia3 == null) {
 							WorldCreator creator = new WorldCreator("world_opia3");
 							creator.environment(World.Environment.NORMAL);
@@ -61,7 +64,7 @@ public class GateWarp implements Listener {
 						p.teleport(Opia3.getSpawnLocation());
 						p.sendMessage("Welcome to: " + ChatColor.DARK_GREEN + "Opia 3");
 						HandlerList.unregisterAll(Main.gwarp);
-					} else if (s.getLine(1).toLowerCase().equalsIgnoreCase("Damara")) {
+					} else if (planet.equalsIgnoreCase("Damara")) {
 						if (Damara == null) {
 							WorldCreator creator = new WorldCreator("world_damara");
 							creator.environment(World.Environment.NORMAL);
@@ -71,7 +74,7 @@ public class GateWarp implements Listener {
 						p.teleport(Damara.getSpawnLocation());
 						p.sendMessage("Welcome to: " + ChatColor.GOLD + "Damara");
 						HandlerList.unregisterAll(Main.gwarp);
-					} else if (s.getLine(1).toLowerCase().equalsIgnoreCase("Sirona")) {
+					} else if (planet.equalsIgnoreCase("Sirona")) {
 						if (Sirona == null) {
 							WorldCreator creator = new WorldCreator("world_sirona");
 							creator.environment(World.Environment.NORMAL);
@@ -81,15 +84,21 @@ public class GateWarp implements Listener {
 						p.teleport(Sirona.getSpawnLocation());
 						p.sendMessage("Welcome to: " + ChatColor.YELLOW + "Sirona");
 						HandlerList.unregisterAll(Main.gwarp);
+					} else if (planet.equalsIgnoreCase("world")) {
+						return;
 					}
+					planet = defaultPlanet;
 				}		
-			} else if (b.getType() != Material.WALL_SIGN) {
+			} else {
 					
 				p.sendMessage(ChatColor.RED + "Invalid Warp");
 				HandlerList.unregisterAll(Main.gwarp);
 					
 			}
 			
+		} else  if (b.getType() != Material.WALL_SIGN) {
+			p.sendMessage(ChatColor.RED + "Invalid Warp");
+			HandlerList.unregisterAll(Main.gwarp);
 		}
 		
 	}
