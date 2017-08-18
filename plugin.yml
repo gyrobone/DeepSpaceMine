@@ -14,11 +14,8 @@ commands:
     gatewarp:
       description: Warps to location.
       usage: /<command>
-    carinus:
-      description: TPs player to Carinus
-      usage: /<command>
-    menu:
-      description: Open Sell Menu
+    wtp:
+      description: TPs player to a planet
       usage: /<command>
 permissions:
     dsm.*:

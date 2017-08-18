@@ -56,17 +56,51 @@ public class Main extends JavaPlugin {
 			
 			switch (lowerCmd) {
 			
-				case "carinus":
-					Player p14 = (Player) sender;
+				case "wtp":
+					Player p15 = (Player) sender;
+					String pName = p15.getName();
 					World Carinus = Bukkit.getWorld("world_carinus");
-					if (Carinus == null) {
-						WorldCreator creator = new WorldCreator("world_carinus");
-						creator.environment(World.Environment.NORMAL);
-						creator.generateStructures(false);
-						Carinus = creator.createWorld();
-					}
-					p14.teleport(Carinus.getSpawnLocation());
+					World Damara = Bukkit.getWorld("world_damara");
+					World Opia3 = Bukkit.getWorld("world_opia3");
+					World Sirona = Bukkit.getWorld("world_sirona");
 			
+					if(Bukkit.getServer().getPlayer(pName).isOp() == true) {
+						if(args[0].equalsIgnoreCase("Carinus")) {
+							if (Carinus == null) {
+								WorldCreator creator = new WorldCreator("world_carinus");
+								creator.environment(World.Environment.NORMAL);
+								creator.generateStructures(false);
+								Carinus = creator.createWorld();
+							}
+							p15.teleport(Carinus.getSpawnLocation());
+						} else if(args[0].equalsIgnoreCase("Damara")) {
+							if (Damara == null) {
+								WorldCreator creator = new WorldCreator("world_damara");
+								creator.environment(World.Environment.NORMAL);
+								creator.generateStructures(false);
+								Damara = creator.createWorld();
+							}
+							p15.teleport(Damara.getSpawnLocation());
+						} else if(args[0].equalsIgnoreCase("Opia3")) {
+							if (Opia3 == null) {
+								WorldCreator creator = new WorldCreator("world_opia3");
+								creator.environment(World.Environment.NORMAL);
+								creator.generateStructures(false);
+								Opia3 = creator.createWorld();
+							}
+							p15.teleport(Opia3.getSpawnLocation());
+						} else if(args[0].equalsIgnoreCase("Sirona")) {
+							if (Sirona == null) {
+								WorldCreator creator = new WorldCreator("world_sirona");
+								creator.environment(World.Environment.NORMAL);
+								creator.generateStructures(false);
+								Sirona = creator.createWorld();
+							}
+							p15.teleport(Sirona.getSpawnLocation());
+						}
+					}
+					return true;
+					
 				case "gatewarp":
 				
 					Player p13 = (Player) sender;
